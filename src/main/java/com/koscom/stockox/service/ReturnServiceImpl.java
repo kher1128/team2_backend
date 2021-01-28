@@ -31,7 +31,7 @@ public class ReturnServiceImpl implements ReturnService{
         JSONArray jsonArray = new JSONArray();
 
         for(int i=0;i<4;i++){
-            int randomIdx = (int)(Math.random() * 3) + 1;
+            int randomIdx = (int)(Math.random() * 4) + 1;
             JSONObject jsonObject = new JSONObject();
             if(i==0 || i==1){
                 priceProblem = koscomMapper.returnProblem(company_id,flag[i],randomIdx);
@@ -42,7 +42,13 @@ public class ReturnServiceImpl implements ReturnService{
             else if(i==3){
                 priceProblem = koscomMapper.returnProblem("kosdaq",flag[i],randomIdx);
             }
+            if(priceProblem == null){
+                System.out.println("i : " + i);
+                System.out.println("flag : "+ flag[i]);
+                System.out.println("company_id : "+ company_id);
+                System.out.println("random_idx : "+ randomIdx);
 
+            }
 
             jsonObject.put("problem",priceProblem.getProblem());
             jsonObject.put("is_true",priceProblem.getIsTrue());
